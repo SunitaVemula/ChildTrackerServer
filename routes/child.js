@@ -17,4 +17,30 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/',function(req, res, next){
+
+  var input = JSON.parse(JSON.stringify(req.body));
+
+  req.getConnection(function (err, connection) {
+
+    var data = {
+      parentid: input.parentid,
+      childmobileno: input.childmobileno
+
+    };
+
+    var q = connection.query("INSERT INTO CHILD set ? ", data, function (err, rows) {
+
+      if (err)
+        console.log("Error inserting : %s ", err);
+
+      res.send(JSON.stringify("i am mad"));
+
+    });
+    console.log(q.sql);
+
+  });
+
+});
+
 module.exports = router;

@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    req.getConnkklmjection(function(err,connection){
+    req.getConnection(function(err,connection){
 
         connection.query('select * from parent', function(err, rows, fields) {
             if (err){
@@ -36,7 +36,7 @@ exports.save = function(req,res) {
 
         };
 
-        var query = connection.query("INSERT INTO parent set  ", data, function (err, rows) {
+        var query = connection.query("INSERT INTO parent set ? ", data, function (err, rows) {
 
             if (err)
                 console.log("Error inserting : %s ", err);
